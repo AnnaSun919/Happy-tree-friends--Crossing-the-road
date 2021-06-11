@@ -2,11 +2,13 @@ Project's name --
 Happy Tree Friend - crossing the road 
 
 
-Description
-Happy Tree Friend - crossing the road  is a game about cuddle(character) is crossing the road , and u need to move the character vertically (up and down), from bottom to the top (which is a safe area and u win this level) to avoid cuddle being crashed by the car. 
+Descriptio
+-------------------------------
+Happy Tree Friend - crossing the road/  is a game about cuddle(the character) is crossing the road , and u need to move cuddle vertically (up and down), from bottom to the top, to cross the road and avoid to be crashed by the car. when finish crossing the road , cuddle is safe and the game will pass to next level.  
 
 
 MVP
+------------------------------
 
 - three level game 
 1. in first level :
@@ -32,17 +34,19 @@ Just when cuddle finsihed this level, u win the game!
 
 
 Backlog
+----------------------------
 
 add sound and music (scream out loud when cuddle get crashed) peaceful song when cuddle is walking
 
 Data structure
 States y States Transitions
---------------------
+------------------------------------
+
 buildSplashScreen () {}
 buildGameScreen () {}
 buildGameOverScreen () {}
 
------------------------------------
+
 Game.js 
 
 
@@ -54,13 +58,13 @@ drawCanvas () {}
 GameOver () {}
 
 car.js
---------------------------------------
+
 
 draw()
 move()
 checkScreenCollision () {}
 
-------------------------------------
+
 cuddle.js
 
 draw () {}
