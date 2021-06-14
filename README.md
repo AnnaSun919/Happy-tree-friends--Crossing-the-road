@@ -2,7 +2,7 @@ Project's name --
 Happy Tree Friend - crossing the road 
 
 
-Descriptio
+Description
 -------------------------------
 Happy Tree Friend - crossing the road/  is a game about cuddle(the character) is crossing the road , and u need to move cuddle vertically (up and down), from bottom to the top, to cross the road and avoid to be crashed by the car. when cuddles finished crossing the road , cuddle is safe and the game will pass to next level.  
 
