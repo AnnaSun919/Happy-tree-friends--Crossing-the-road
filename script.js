@@ -18,10 +18,6 @@ let road = new Image();
 road.src = './image/road2.png'
 let carred = new Image();
 carred.src ='./image/car1.png'
-// let carblue = new Image()
-// carblue.src = './image/car3.png'
-// let cargreen = new Image ()
-// cargreen.src = './image/car51.png'
 
 //gameover image here
 let gameoverBG = new Image()
@@ -43,7 +39,10 @@ let level = 1
 let cars =[]
 cars[0] = {
   x:0,
-  y:canvas.height-200
+}
+
+cars2[0] = {
+  x:0,
 }
 
 ctx.drawImage(startBg,0,0)
@@ -64,6 +63,7 @@ function draw(){
     ctx.drawImage(road,0,canvas.height-180,canvas.width,100)
 
     if(level === 2){
+     
       ctx.drawImage(road,0,canvas.height-380,canvas.width,100)
     }
 
@@ -76,88 +76,56 @@ function draw(){
     
     for (let i = 0; i < cars.length; i++){
  
-      ctx.drawImage(carred,cars[i].x,cars[i].y,120,120)
+      ctx.drawImage(carred,cars[i].x,canvas.height-200,120,120)
    
     cars[i].x = cars[i].x + 10
 
- 
-
     if(cars[i].x == 800){  
       cars.push({  
-          x : -100-(Math.round(Math.random()*10)*10),
-          y : canvas.height-200
+          x : -100-(Math.round(Math.random()*10)*10)
       });   
     }
-
-  
-    
-    
-   
     ctx.font = '20px Verdana'
     ctx.fillText(`Level: ${level}`, canvas.width - 100, 50)
-    // ctx.fillText(`Score: ${score}`, 20, 50)
    
-
-    //check winning 
+  //check winning 
   if(cuddleY === 50){
     level = level+1
     cuddleY = canvas.height-100
     ctx.drawImage(carred,cars[i].x,cars[i].y-200,120,120)
-
   }
-  
-
   if(level === 4){
     location.reload()
   }
-  
-
-  
- 
-  
-    //check collision here
-    if(cuddleY===cars[i].y  && cuddleX-100 <=cars[i].x && cuddleX-100 >=cars[i].x-150){
-      gameover= true;
+   //check collision here
+    if(cuddleY===canvas.height -200  && cuddleX-100 <=cars[i].x && cuddleX-100 >=cars[i].x-150){
+        gameover= true;
     }
 
-    
-    
-
- 
-
- 
-
+    if(cuddleY===canvas.height -400  && cuddleX-100 <=cars[i].x && cuddleX-100 >=cars[i].x-150){
+      gameover= true;
   }
+}
 
-
-      
- 
-  
-
-    // let car1 = 
-    // let car2 = ctx.drawImage(carblue, carredX- carIntervalbase-randomInterval, canvas.height-230,120,150)
-    // let car3 = ctx.drawImage(cargreen, carredX- carIntervalbase, canvas.height-200,120,90)
-
-
-    
-    
-
-    
-
-
-    
 
     if(gameover){
-      
 
+      setInterval(() => {
         cancelAnimationFrame(intervalId)
         ctx.drawImage(gameoverBG,0,0, 800, 750)
+        
+      }, 1000);
+        
+        setInterval(() => {
+          location.reload()
+          
+        }, 2000);
+       
       }
+
       else{
         intervalId = requestAnimationFrame( draw )
-        audiostart.play
-        
-       
+        audiostart.play 
       }
 }
 
@@ -213,8 +181,5 @@ document.addEventListener('keydown', (event) =>{
       cuddleX = cuddleX + 100
     }
   }
-
 })
-
-
 })
