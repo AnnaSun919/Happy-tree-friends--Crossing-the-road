@@ -38,12 +38,12 @@ let candy = 0
 let level = 1
 let cars =[]
 cars[0] = {
-  x:0,
+  x:0
 }
 
-cars2[0] = {
-  x:0,
-}
+
+let carArr = []
+let carX = 0
 
 ctx.drawImage(startBg,0,0)
 
@@ -55,36 +55,55 @@ function start(){
   draw()
 }
 
+function road1(height){
+  ctx.drawImage(road,0,height,canvas.width,100)
+}
+
+function car1(random, y){
+  ctx.drawImage(carred,carX,y,120,120)
+  carX = carX + random
+  if(carX > 800){
+    carX = 0
+  }
+ return carX;
+}
+
 
 function draw(){
   
   
     ctx.drawImage(bg,0,0,800,750)
-    ctx.drawImage(road,0,canvas.height-180,canvas.width,100)
+    road1(canvas.height-200)
+    
+    car1(canvas.height -200)
+
+    console.log(carX)
+  
 
     if(level === 2){
-     
-      ctx.drawImage(road,0,canvas.height-380,canvas.width,100)
+      road1(canvas.height-400)
+      car1(canvas.height -400)
     }
 
     if(level===3){
-      ctx.drawImage(road,0,canvas.height-380,canvas.width,100)
-      ctx.drawImage(road,0,canvas.height-280,canvas.width,100)
+      road1(canvas.height-400)
+      road1(canvas.height-300)
+      car1(canvas.height -300)
+      car1(canvas.height -400)
     }
-  
     ctx.drawImage(cuddle,cuddleX,cuddleY, 100 ,100)
     
-    for (let i = 0; i < cars.length; i++){
+    // for (let i = 0; i < cars.length; i++){
  
-      ctx.drawImage(carred,cars[i].x,canvas.height-200,120,120)
+    //   ctx.drawImage(carred,cars[i].x,canvas.height-200,120,120)
    
-    cars[i].x = cars[i].x + 10
+    // cars[i].x = cars[i].x + 10
 
-    if(cars[i].x == 800){  
-      cars.push({  
-          x : -100-(Math.round(Math.random()*10)*10)
-      });   
-    }
+    // if(cars[i].x == 800){  
+    //   cars.push({  
+    //       x : -100-(Math.round(Math.random()*10)*10)
+    //   });   
+    // }
     ctx.font = '20px Verdana'
     ctx.fillText(`Level: ${level}`, canvas.width - 100, 50)
    
@@ -92,24 +111,23 @@ function draw(){
   if(cuddleY === 50){
     level = level+1
     cuddleY = canvas.height-100
-    ctx.drawImage(carred,cars[i].x,cars[i].y-200,120,120)
+  
   }
   if(level === 4){
     location.reload()
   }
    //check collision here
-    if(cuddleY===canvas.height -200  && cuddleX-100 <=cars[i].x && cuddleX-100 >=cars[i].x-150){
+    if(cuddleY===canvas.height -200  && cuddleX-100 <=carX && cuddleX-100 >=carX-150){
         gameover= true;
     }
 
-    if(cuddleY===canvas.height -400  && cuddleX-100 <=cars[i].x && cuddleX-100 >=cars[i].x-150){
-      gameover= true;
-  }
-}
+  
+//}
 
 
     if(gameover){
 
+      cuddleX = cuddleX+10
       setInterval(() => {
         cancelAnimationFrame(intervalId)
         ctx.drawImage(gameoverBG,0,0, 800, 750)
