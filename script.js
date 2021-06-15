@@ -40,6 +40,7 @@ let cars =[]
 cars[0] = {
   x:0
 }
+let carss; 
 
 
 let carArr = []
@@ -59,9 +60,11 @@ function road1(height){
   ctx.drawImage(road,0,height,canvas.width,100)
 }
 
-function car1(random, y){
+function car1( y){
+
+  
   ctx.drawImage(carred,carX,y,120,120)
-  carX = carX + random
+  carX = carX +10
   if(carX > 800){
     carX = 0
   }
@@ -70,14 +73,15 @@ function car1(random, y){
 
 
 function draw(){
-  
-  
+  let random = Math.floor(Math.random()*20)
+  let random2 = Math.floor(Math.random()*1)
     ctx.drawImage(bg,0,0,800,750)
-    road1(canvas.height-200)
-    
-    car1(canvas.height -200)
 
-    console.log(carX)
+    road1(canvas.height-200)
+    car1(canvas.height -200)
+   
+
+    
   
 
     if(level === 2){
