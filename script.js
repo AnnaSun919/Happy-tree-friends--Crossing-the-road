@@ -36,15 +36,9 @@ intervalId = null
 let gameover = false;
 let candy = 0
 let level = 1
-let cars =[]
-cars[0] = {
-  x:0
-}
-let carss; 
-
-
-let carArr = []
 let carX = 0
+let carX2 = -100
+let carX3 = -200
 
 ctx.drawImage(startBg,0,0)
 
@@ -61,53 +55,56 @@ function road1(height){
 }
 
 function car1( y){
-
-  
   ctx.drawImage(carred,carX,y,120,120)
   carX = carX +10
   if(carX > 800){
-    carX = 0
+    carX = -Math.floor(Math.random()*100)
   }
  return carX;
 }
 
+function car2( y){
+  ctx.drawImage(carred,carX2,y,120,120)
+  carX2 = carX2 +15
+  if(carX2 > 800){
+    carX2 = -Math.floor(Math.random()*1000)
+  }
+ return carX2;
+}
+
+function car3( y){
+  ctx.drawImage(carred,carX3,y,120,120)
+  carX3 = carX3 + 20
+  if(carX3 > 800){
+    carX3 = -Math.floor(Math.random()*1000)
+  }
+ return carX3;
+}
 
 function draw(){
-  let random = Math.floor(Math.random()*20)
-  let random2 = Math.floor(Math.random()*1)
+ 
     ctx.drawImage(bg,0,0,800,750)
 
     road1(canvas.height-200)
-    car1(canvas.height -200)
-   
 
-    
-  
+    car1(canvas.height -200)
 
     if(level === 2){
       road1(canvas.height-400)
-      car1(canvas.height -400)
+      car2(canvas.height -400)
+      carX = carX + 5
     }
 
     if(level===3){
       road1(canvas.height-400)
       road1(canvas.height-300)
-      car1(canvas.height -300)
-      car1(canvas.height -400)
+   
+      car2(canvas.height -400)
+      car3(canvas.height -300)
+      carX = carX + 10
+      carX2 = carX2 +15
     }
     ctx.drawImage(cuddle,cuddleX,cuddleY, 100 ,100)
-    
-    // for (let i = 0; i < cars.length; i++){
- 
-    //   ctx.drawImage(carred,cars[i].x,canvas.height-200,120,120)
-   
-    // cars[i].x = cars[i].x + 10
-
-    // if(cars[i].x == 800){  
-    //   cars.push({  
-    //       x : -100-(Math.round(Math.random()*10)*10)
-    //   });   
-    // }
     ctx.font = '20px Verdana'
     ctx.fillText(`Level: ${level}`, canvas.width - 100, 50)
    
@@ -120,13 +117,20 @@ function draw(){
   if(level === 4){
     location.reload()
   }
+
+
    //check collision here
     if(cuddleY===canvas.height -200  && cuddleX-100 <=carX && cuddleX-100 >=carX-150){
         gameover= true;
     }
+    if(cuddleY===canvas.height -400  && cuddleX-100 <=carX2 && cuddleX-100 >=carX2-150){
+      gameover= true;
+  }
+  if(cuddleY===canvas.height -300  && cuddleX-100 <=carX3 && cuddleX-100 >=carX3-150){
+    gameover= true;
+}
 
-  
-//}
+
 
 
     if(gameover){
