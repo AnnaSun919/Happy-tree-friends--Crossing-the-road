@@ -18,7 +18,31 @@ let road = new Image();
 road.src = './image/road2.png'
 let carred = new Image();
 carred.src ='./image/car1.png'
+let candyimg = new Image();
+candyimg.src = "/image/candy/candy2.4.png"
+//--------------------------------
 
+let CandyArray = []
+
+
+CandyArray[0] = new Image();
+CandyArray[0].src = "/image/candy/candy2.1.png"
+
+CandyArray[1] = new Image();
+CandyArray[1].src = "/image/candy/candy2.2.png"
+
+CandyArray[2] = new Image();
+CandyArray[2].src = "/image/candy/candy2.3.png"
+
+CandyArray[3] = new Image();
+CandyArray[3].src = "/image/candy/candy2.4.png"
+
+CandyArray[4] = new Image();
+CandyArray[4].src = "/image/candy/candy2.5.png"
+
+CandyArray[5] = new Image();
+CandyArray[5].src = "/image/candy/candy2.1.png"
+//------------------------------------------------------
 //gameover image here
 let gameoverBG = new Image()
 gameoverBG.src = './image/crash.jpg'
@@ -39,6 +63,9 @@ let level = 1
 let carX = 0
 let carX2 = -100
 let carX3 = -200
+
+let candysizeH = 100
+let candysizeW =100
 
 ctx.drawImage(startBg,0,0)
 
@@ -81,13 +108,49 @@ function car3( y){
  return carX3;
 }
 
+
+// function movingcandy(){
+//   ctx.beginPath()
+
+//   ctx.drawImage(candyimg,0+100,canvas.height -200, 100,100)
+//   candyimg.rotate(20*Math.PI/180);
+  
+//   ctx.closePath()
+
+// }
+
+
+let spin = 0
+
+
+
+
+
+
+
+
+
+   
+  
+
 function draw(){
+
+  
  
+  
     ctx.drawImage(bg,0,0,800,750)
+
 
     road1(canvas.height-200)
 
     car1(canvas.height -200)
+
+    ctx.beginPath()
+    ctx.rotate(spin / 180 / Math.PI);
+    ctx.drawImage(candyimg, 50, -50);
+    spin += 10;
+    ctx.closePath()
+
 
     if(level === 2){
       road1(canvas.height-400)
@@ -118,6 +181,8 @@ function draw(){
     location.reload()
   }
 
+  
+
 
    //check collision here
     if(cuddleY===canvas.height -200  && cuddleX-100 <=carX && cuddleX-100 >=carX-150){
@@ -129,6 +194,8 @@ function draw(){
   if(cuddleY===canvas.height -300  && cuddleX-100 <=carX3 && cuddleX-100 >=carX3-150){
     gameover= true;
 }
+
+
 
 
 
