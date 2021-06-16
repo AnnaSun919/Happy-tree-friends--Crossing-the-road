@@ -35,8 +35,6 @@ gameoverBG.src = './image/crash.jpg'
 let audiostart = new Audio()
 audiostart.src ='./audio/happy-tree-friends-theme-song.mp3'
 
-
-
 //Default stuff here 
 let cuddleY = canvas.height-100
 let cuddleX = canvas.width/2
@@ -49,10 +47,10 @@ let carX2 = -100
 let carX3 = -200
 let win = false 
 
-let candysizeH = 100
-let candysizeW =100
+let candyArray =[[100,130],[150,120]]
 
-let candyXarray = [5,10]
+
+
 
 
 
@@ -63,6 +61,7 @@ function start(){
   startBtn.style.display = 'none' 
   startBg.style.display = 'none'
   audiostart.play()
+  audiostart.volume = 0.1
   draw()
 }
 
@@ -105,25 +104,23 @@ let dw = 140
 let dh = 140
 
 
-function candy3(){
+function candy3(element){
   ctx.drawImage(candyimg,candyX,candyY,dw,dh)
+
   if(dw < 130 ||dw> 150){
     sizeChange = - sizeChange
-  
   }
+
   candyX = candyX - (sizeChange/2)
   candyY = candyY - (sizeChange/2)
   dw = dw + sizeChange
   dh = dh + sizeChange
 
-  let randomY = Math.floor(Math.random()*canvas.height-100)
-  let randomX = Math.floor(Math.random()*canvas.width-100)
-
   if( cuddleX-100 <=candyX && cuddleX-100 >=candyX-100 &&cuddleY -40 < candyY && cuddleY +150 > candyY  ){
 
-    // 
-    candyX = randomX
-    candyY = randomY
+    candyX = element[0]
+    candyY = element[1]
+  
     candyAmount = candyAmount -1
 
 
@@ -173,8 +170,7 @@ function draw(){
 
     
 
-    console.log(candyY)
-    console.log(cuddleY)
+
 
     if(level === 2){
       road1(canvas.height-400)
@@ -191,16 +187,18 @@ function draw(){
       carX = carX + 10
       carX2 = carX2 +15
       ctx.font = '20px Verdana'
-      candy3()
+
+      for (let i = 0 ; i <candyArray.length ; i++){
+        candyArray.forEach((element) => {
+      candy3(element)
+      
+      });
+      
+      }
 
       if(candyAmount>0){
-
         ctx.fillText(`Candy : ${candyAmount} `,  20, 50)
-      
         }
-
-      
-     
     }
     ctx.drawImage(cuddle,cuddleX,cuddleY, 100 ,100)
     ctx.font = '20px Verdana'
@@ -219,12 +217,7 @@ function draw(){
   
   }
   if(level === 4){
-
     win = true
-
-
-
-    
   }
 
   
