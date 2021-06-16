@@ -19,7 +19,7 @@ road.src = './image/road2.png'
 let carred = new Image();
 carred.src ='./image/car1.png'
 let candyimg = new Image();
-candyimg.src = "/image/candy.png"
+candyimg.src = './image/candy/candy2.4.png'
 
 let winImg = new Image()
 winImg.src ="./image/nuttysafe.jpeg"
@@ -98,6 +98,12 @@ function car3( y){
 }
 
 
+let sizeChange = 1
+let candyX =500;
+let candyY =canvas.height - 100;
+let dw = 140
+let dh = 140
+
 
 function candy3(){
   ctx.drawImage(candyimg,candyX,candyY,dw,dh)
@@ -120,8 +126,7 @@ function candy3(){
     candyY = randomY
     candyAmount = candyAmount -1
 
-    console.log(candyY)
-    console.log(cuddleY)
+
   }
       // candyAmount = candyAmount -1
 
@@ -141,11 +146,7 @@ function candy3(){
 
 //   ctx.drawImage(candyimg,x,y,size)
 
-  let sizeChange = 1
-  let candyX =500;
-  let candyY =canvas.height - 100;
-  let dw = 140
-  let dh = 140
+
 
 //  function Candy (candyX,candyY,dw,dh){
 //     this.candyX = candyX
