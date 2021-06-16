@@ -20,28 +20,12 @@ let carred = new Image();
 carred.src ='./image/car1.png'
 let candyimg = new Image();
 candyimg.src = "/image/candy/candy2.4.png"
-//--------------------------------
 
-let CandyArray = []
+let winImg = new Image()
+winImg.src ="/image/nuttysafe.jpg"
 
 
-CandyArray[0] = new Image();
-CandyArray[0].src = "/image/candy/candy2.1.png"
 
-CandyArray[1] = new Image();
-CandyArray[1].src = "/image/candy/candy2.2.png"
-
-CandyArray[2] = new Image();
-CandyArray[2].src = "/image/candy/candy2.3.png"
-
-CandyArray[3] = new Image();
-CandyArray[3].src = "/image/candy/candy2.4.png"
-
-CandyArray[4] = new Image();
-CandyArray[4].src = "/image/candy/candy2.5.png"
-
-CandyArray[5] = new Image();
-CandyArray[5].src = "/image/candy/candy2.1.png"
 //------------------------------------------------------
 //gameover image here
 let gameoverBG = new Image()
@@ -58,20 +42,26 @@ let cuddleY = canvas.height-100
 let cuddleX = canvas.width/2
 intervalId = null
 let gameover = false;
-let candy = 0
+let candyAmount = 2
 let level = 1
 let carX = 0
 let carX2 = -100
 let carX3 = -200
+let win = false 
 
 let candysizeH = 100
 let candysizeW =100
+
+let candyXarray = []
+
+candyXarray[0] ={x: 150}
+candyXarray[1] ={x: 200}
 
 ctx.drawImage(startBg,0,0)
 
 //the start button first 
 function start(){
-  startBtn.style.display = 'none'
+  startBtn.style.display = 'none' 
   startBg.style.display = 'none'
   audiostart.play()
   draw()
@@ -117,40 +107,41 @@ function car3( y){
   
 //   ctx.closePath()
 
+
+
+
+// function movingCandy(x,y,size){
+
+//   ctx.drawImage(candyimg,x,y,size)
+
+  let sizeChange = 1
+  let candyX =500;
+  let candyY =canvas.height - 100;
+  let dw = 140
+  let dh = 140
+
+//  function Candy (candyX,candyY,dw,dh){
+//     this.candyX = candyX
+//     this.candyY = candyY;
+//     this.dw = dw
+//     this.dh = dh
 // }
 
 
-let spin = 0
 
 
 
+ 
 
 
 
-
-
-
-   
-  
 
 function draw(){
-
-  
- 
-  
     ctx.drawImage(bg,0,0,800,750)
 
-
     road1(canvas.height-200)
-
+  
     car1(canvas.height -200)
-
-    ctx.beginPath()
-    ctx.rotate(spin / 180 / Math.PI);
-    ctx.drawImage(candyimg, 50, -50);
-    spin += 10;
-    ctx.closePath()
-
 
     if(level === 2){
       road1(canvas.height-400)
@@ -166,19 +157,57 @@ function draw(){
       car3(canvas.height -300)
       carX = carX + 10
       carX2 = carX2 +15
+      ctx.font = '20px Verdana'
+
+      if(candyAmount>0){
+
+        ctx.fillText(`Candy : ${candyAmount} `,  20, 50)
+      
+        }
+
+      function candy3(){
+        ctx.drawImage(candyimg,candyX,candyY,dw,dh)
+        if(dw < 130 ||dw> 150){
+          sizeChange = - sizeChange
+        
+        }
+        candyX = candyX - (sizeChange/2)
+        candyY = candyY - (sizeChange/2)
+        dw = dw + sizeChange
+        dh = dh + sizeChange
+
+        if(cuddleY === canvas.height -100 && cuddleX-100 <=candyX && cuddleX-100 >=candyX-100 ){
+
+          console.log('candy collect')    
+        }
+            // candyAmount = candyAmount -1
+
+      }
+      candy3()
     }
     ctx.drawImage(cuddle,cuddleX,cuddleY, 100 ,100)
     ctx.font = '20px Verdana'
     ctx.fillText(`Level: ${level}`, canvas.width - 100, 50)
    
   //check winning 
+  // if(cuddleY === canvas.height -200 && cuddleX-100 <=candyX && cuddleX-100 >=candyX-100 ){
+  //   console.log("candycollected")
+
+  // }
+
+
   if(cuddleY === 50){
     level = level+1
     cuddleY = canvas.height-100
   
   }
   if(level === 4){
-    location.reload()
+
+    win = true
+
+
+
+    
   }
 
   
@@ -186,6 +215,8 @@ function draw(){
 
    //check collision here
     if(cuddleY===canvas.height -200  && cuddleX-100 <=carX && cuddleX-100 >=carX-150){
+
+    
         gameover= true;
     }
     if(cuddleY===canvas.height -400  && cuddleX-100 <=carX2 && cuddleX-100 >=carX2-150){
@@ -196,13 +227,20 @@ function draw(){
 }
 
 
+if(win){
 
+ctx.drawImage(winImg,0,0,800,750)
 
-
+  setInterval(() => {
+    location.reload()
+    
+  }, 2000);
+  }
+  
 
     if(gameover){
 
-      cuddleX = cuddleX+10
+      
       setInterval(() => {
         cancelAnimationFrame(intervalId)
         ctx.drawImage(gameoverBG,0,0, 800, 750)
