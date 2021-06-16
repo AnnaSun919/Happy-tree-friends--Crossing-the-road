@@ -22,7 +22,7 @@ let candyimg = new Image();
 candyimg.src = "/image/candy/candy2.4.png"
 
 let winImg = new Image()
-winImg.src ="/image/nuttysafe.jpg"
+winImg.src ="./image/nuttysafe.jpeg"
 
 
 
@@ -52,10 +52,9 @@ let win = false
 let candysizeH = 100
 let candysizeW =100
 
-let candyXarray = []
+let candyXarray = [5,10]
 
-candyXarray[0] ={x: 150}
-candyXarray[1] ={x: 200}
+
 
 ctx.drawImage(startBg,0,0)
 
@@ -98,7 +97,32 @@ function car3( y){
  return carX3;
 }
 
+function candy3(){
+  ctx.drawImage(candyimg,candyX,candyY,dw,dh)
+  if(dw < 130 ||dw> 150){
+    sizeChange = - sizeChange
+  
+  }
+  candyX = candyX - (sizeChange/2)
+  candyY = candyY - (sizeChange/2)
+  dw = dw + sizeChange
+  dh = dh + sizeChange
 
+  let randomY = Math.floor(Math.random()*canvas.height-100)
+  let randomX = Math.floor(Math.random()*canvas.width-100)
+
+  if(cuddleY>=candyY && cuddleY-100 <=candyY-100 && -100 && cuddleX-100 <=candyX && cuddleX-100 >=candyX-100 ){
+
+    candyX = randomX
+    candyY = randomY
+    candyAmount = candyAmount -1
+
+    console.log(candyY)
+    console.log(cuddleY)
+  }
+      // candyAmount = candyAmount -1
+
+}
 // function movingcandy(){
 //   ctx.beginPath()
 
@@ -143,6 +167,8 @@ function draw(){
   
     car1(canvas.height -200)
 
+    candy3()
+
     if(level === 2){
       road1(canvas.height-400)
       car2(canvas.height -400)
@@ -165,25 +191,8 @@ function draw(){
       
         }
 
-      function candy3(){
-        ctx.drawImage(candyimg,candyX,candyY,dw,dh)
-        if(dw < 130 ||dw> 150){
-          sizeChange = - sizeChange
-        
-        }
-        candyX = candyX - (sizeChange/2)
-        candyY = candyY - (sizeChange/2)
-        dw = dw + sizeChange
-        dh = dh + sizeChange
-
-        if(cuddleY === canvas.height -100 && cuddleX-100 <=candyX && cuddleX-100 >=candyX-100 ){
-
-          console.log('candy collect')    
-        }
-            // candyAmount = candyAmount -1
-
-      }
-      candy3()
+      
+     
     }
     ctx.drawImage(cuddle,cuddleX,cuddleY, 100 ,100)
     ctx.font = '20px Verdana'
@@ -242,6 +251,7 @@ ctx.drawImage(winImg,0,0,800,750)
 
       
       setInterval(() => {
+        audiostart.play()
         cancelAnimationFrame(intervalId)
         ctx.drawImage(gameoverBG,0,0, 800, 750)
         
@@ -250,7 +260,7 @@ ctx.drawImage(winImg,0,0,800,750)
         setInterval(() => {
           location.reload()
           
-        }, 2000);
+        }, 1000);
        
       }
 
