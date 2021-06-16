@@ -97,6 +97,8 @@ function car3( y){
  return carX3;
 }
 
+
+
 function candy3(){
   ctx.drawImage(candyimg,candyX,candyY,dw,dh)
   if(dw < 130 ||dw> 150){
@@ -111,8 +113,9 @@ function candy3(){
   let randomY = Math.floor(Math.random()*canvas.height-100)
   let randomX = Math.floor(Math.random()*canvas.width-100)
 
-  if(cuddleY>=candyY && cuddleY-100 <=candyY-100 && -100 && cuddleX-100 <=candyX && cuddleX-100 >=candyX-100 ){
+  if( cuddleX-100 <=candyX && cuddleX-100 >=candyX-100 &&cuddleY -40 < candyY && cuddleY +150 > candyY  ){
 
+    // 
     candyX = randomX
     candyY = randomY
     candyAmount = candyAmount -1
@@ -167,7 +170,10 @@ function draw(){
   
     car1(canvas.height -200)
 
-    candy3()
+    
+
+    console.log(candyY)
+    console.log(cuddleY)
 
     if(level === 2){
       road1(canvas.height-400)
@@ -184,6 +190,7 @@ function draw(){
       carX = carX + 10
       carX2 = carX2 +15
       ctx.font = '20px Verdana'
+      candy3()
 
       if(candyAmount>0){
 
@@ -224,8 +231,6 @@ function draw(){
 
    //check collision here
     if(cuddleY===canvas.height -200  && cuddleX-100 <=carX && cuddleX-100 >=carX-150){
-
-    
         gameover= true;
     }
     if(cuddleY===canvas.height -400  && cuddleX-100 <=carX2 && cuddleX-100 >=carX2-150){
@@ -260,7 +265,7 @@ ctx.drawImage(winImg,0,0,800,750)
         setInterval(() => {
           location.reload()
           
-        }, 1000);
+        }, 2000);
        
       }
 
