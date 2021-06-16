@@ -19,7 +19,7 @@ road.src = './image/road2.png'
 let carred = new Image();
 carred.src ='./image/car1.png'
 let candyimg = new Image();
-candyimg.src = "/image/candy/candy2.4.png"
+candyimg.src = "/image/candy.png"
 
 let winImg = new Image()
 winImg.src ="./image/nuttysafe.jpeg"
