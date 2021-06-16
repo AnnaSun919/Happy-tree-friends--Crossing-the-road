@@ -47,7 +47,7 @@ let carX2 = -100
 let carX3 = -200
 let win = false 
 
-let candyArray =[[100,130],[150,120]]
+let candyArray =[[600,520],[350,350]]
 
 
 
@@ -97,29 +97,31 @@ function car3( y){
 }
 
 
-let sizeChange = 1
-let candyX =500;
-let candyY =canvas.height - 100;
-let dw = 140
-let dh = 140
+let sizeChange = 0.5
+let dw = 50
+let dh = 50
 
 
 function candy3(element){
-  ctx.drawImage(candyimg,candyX,candyY,dw,dh)
+  ctx.drawImage(candyimg,element[0],element[1],dw,dh)
 
-  if(dw < 130 ||dw> 150){
+  if(dw < 40 ||dw> 60){
     sizeChange = - sizeChange
   }
 
-  candyX = candyX - (sizeChange/2)
-  candyY = candyY - (sizeChange/2)
+  element[0] = element[0] - (sizeChange/2)
+  element[1] = element[1] - (sizeChange/2)
   dw = dw + sizeChange
   dh = dh + sizeChange
 
-  if( cuddleX-100 <=candyX && cuddleX-100 >=candyX-100 &&cuddleY -40 < candyY && cuddleY +150 > candyY  ){
+  if(  element[0] < cuddleX + 100 &&
+    element[0] + dw > cuddleX &&
+    element[1] < cuddleY + 100 &&
+    element[1] + dh > cuddleY){
+   
 
-    candyX = element[0]
-    candyY = element[1]
+     element[0] = Math.floor(Math.random()*canvas.width -300)
+     element[1] = Math.floor(Math.random()*canvas.width -300)
   
     candyAmount = candyAmount -1
 
@@ -172,6 +174,7 @@ function draw(){
 
 
 
+
     if(level === 2){
       road1(canvas.height-400)
       car2(canvas.height -400)
@@ -184,20 +187,16 @@ function draw(){
    
       car2(canvas.height -400)
       car3(canvas.height -300)
-      carX = carX + 10
-      carX2 = carX2 +15
-      ctx.font = '20px Verdana'
-
-      for (let i = 0 ; i <candyArray.length ; i++){
-        candyArray.forEach((element) => {
-      candy3(element)
+      carX = carX 
+      carX2 = carX2 
+      ctx.font = 'bold 20px Verdana'
+      candyArray.forEach((element) => {
+        candy3(element)
+        })
       
-      });
       
-      }
-
       if(candyAmount>0){
-        ctx.fillText(`Candy : ${candyAmount} `,  20, 50)
+        ctx.fillText(`you need to collect : ${candyAmount} candy(ies) `,  20, 50)
         }
     }
     ctx.drawImage(cuddle,cuddleX,cuddleY, 100 ,100)
@@ -210,12 +209,21 @@ function draw(){
 
   // }
 
-
+  if(level ===1 || level ===2){
   if(cuddleY === 50){
     level = level+1
     cuddleY = canvas.height-100
   
   }
+}
+
+if(level ===3){
+  if(cuddleY === 50 && candyAmount === 0 ){
+    level = level+1
+ 
+  
+  }
+}
   if(level === 4){
     win = true
   }
