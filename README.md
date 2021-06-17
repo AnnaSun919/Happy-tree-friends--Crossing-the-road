@@ -13,82 +13,55 @@ MVP
 - three level game 
 1. in first level :
 
-there is one road and one car //
-the car move from right to left //
-when the car on the road is gone , another car will apear//
-Nutty is going to cross the road, it moves vertically and horizontally //
-Nutty get crashed will end the game //
-if Nutty finished crossing the road then pass to the next level
+there is one road and one car  
+the car move from right to left  
+when the car on the road is gone , another car will apear  
+Nutty is going to cross the road, it moves vertically and horizontally  
+Nutty get crashed will end the game   
+if Nutty finished crossing the road then pass to the next level  
 
 2. in second level :
 
-two road and one car on each road, //
-the other settings are same as level 1// 
+two road and one car on each road  
+the other settings are same as level 1   
 
 3. in third level :
 
-three road and one car on each road 
-nutty has to collect enough candies.
-the other settings are same as level 1 and level 2.//
-Just when Nutty finsihed this level, u win the game!//
+three road and one car on each road   
+nutty has to collect enough candies.  
+the other settings are same as level 1 and level 2.  
+Just when Nutty finsihed this level, u win the game!  
 
 
 
 Backlog
 ----------------------------
 
-add sound and music (scream out loud when cuddle get crashed) peaceful song when cuddle is walking
+add music 
 
-Data structure
-States y States Transitions
+Data structure States y States Transitions
 ------------------------------------
 
 buildSplashScreen () {}
-
 buildGameScreen () {}
-
 buildGameOverScreen () {}
+  
+starLoop () {}  
+checkCollisions () {}  
+drawCanvas () {}  
+GameOver () {}  
+
+car(){}  
+checkScreenCollision () {}  
 
 
-Game.js 
+cuddle()  
+draw () {}  
+move () {}  
+checkScreenCollision () {}  
 
 
-starLoop () {}
-
-checkCollisions () {}
-
-drawCanvas () {}
-
-GameOver () {}
-
-
-
-car.js
-
-
-draw()
-
-move()
-
-checkScreenCollision () {}
-
-
-cuddle.js
-
-draw () {}
-move () {}
-checkScreenCollision () {}
-
-
-candy.js
-
-draw()
-move () {}
-checkScreenCollision () {}
-
-
-Additional Links
-Trello
-
-
-Slides
+candy()  
+draw()  
+move () {}  
+checkScreenCollision () {}  
