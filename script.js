@@ -208,6 +208,7 @@ if(level ===3){
 if(win){
 
 ctx.drawImage(winImg,0,0,800,800)
+cancelAnimationFrame(intervalId)
 
   setInterval(() => {
     location.reload()
@@ -220,7 +221,7 @@ ctx.drawImage(winImg,0,0,800,800)
 
       
       setInterval(() => {
-        audiostart.play()
+       
         cancelAnimationFrame(intervalId)
         ctx.drawImage(gameoverBG,0,0, 800, 750)
         
