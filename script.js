@@ -11,7 +11,7 @@ let startBtn =document.querySelector("#start")
 //Main image here 
 //-------------------------------
 let bg = new Image();
-bg.src = './image/background-main12.png'
+bg.src = './image/background-main2.jpg'
 let cuddle = new Image();
 cuddle.src ='./image/clearnutty.png'
 let road = new Image();
@@ -33,7 +33,7 @@ gameoverBG.src = './image/crash.jpg'
 
 //audio here
 let audiostart = new Audio()
-audiostart.src ='./audio/happy-tree-friends-theme-song.mp3'
+audiostart.src ='./audio/happy-tree-friends-theme-song-1-hour.mp3'
 
 //Default stuff here 
 let cuddleY = canvas.height-100
@@ -47,7 +47,7 @@ let carX2 = -100
 let carX3 = -200
 let win = false 
 
-let candyArray =[[600,520],[350,350]]
+let candyArray =[[600,520],[250,350]]
 
 
 
@@ -114,66 +114,26 @@ function candy3(element){
   dw = dw + sizeChange
   dh = dh + sizeChange
 
-  if(  element[0] < cuddleX + 100 &&
-    element[0] + dw > cuddleX &&
-    element[1] < cuddleY + 100 &&
-    element[1] + dh > cuddleY){
-   
+  if(  element[0] < cuddleX + 100 && element[0] + dw > cuddleX &&  element[1] < cuddleY + 100 && element[1] + dh > cuddleY){
+  
 
-     element[0] = Math.floor(Math.random()*canvas.width -300)
-     element[1] = Math.floor(Math.random()*canvas.width -300)
+     element[0] = (Math.random() * (canvas.width - 100) + 100)
+     element[1] = (Math.random() * (canvas.height - 300) + 300)
+     console.log(element[0],element[1])
   
     candyAmount = candyAmount -1
 
 
   }
-      // candyAmount = candyAmount -1
-
-}
-// function movingcandy(){
-//   ctx.beginPath()
-
-//   ctx.drawImage(candyimg,0+100,canvas.height -200, 100,100)
-//   candyimg.rotate(20*Math.PI/180);
-  
-//   ctx.closePath()
-
-
-
-
-// function movingCandy(x,y,size){
-
-//   ctx.drawImage(candyimg,x,y,size)
-
-
-
-//  function Candy (candyX,candyY,dw,dh){
-//     this.candyX = candyX
-//     this.candyY = candyY;
-//     this.dw = dw
-//     this.dh = dh
-// }
-
-
-
-
-
- 
-
-
-
-
-function draw(){
-    ctx.drawImage(bg,0,0,800,750)
-
-    road1(canvas.height-200)
-  
-    car1(canvas.height -200)
-
     
 
+}
 
-
+function draw(){
+  
+  ctx.drawImage(bg,0,0,800,750)
+  road1(canvas.height-200)
+  car1(canvas.height -200)
 
     if(level === 2){
       road1(canvas.height-400)
@@ -190,24 +150,22 @@ function draw(){
       carX = carX 
       carX2 = carX2 
       ctx.font = 'bold 20px Verdana'
+      //two candies 
       candyArray.forEach((element) => {
         candy3(element)
         })
       
       
       if(candyAmount>0){
-        ctx.fillText(`you need to collect : ${candyAmount} candy(ies) `,  20, 50)
+        ctx.fillText(`you need to collect : ${candyAmount} candy `,  20, 50)
         }
     }
+
     ctx.drawImage(cuddle,cuddleX,cuddleY, 100 ,100)
     ctx.font = '20px Verdana'
     ctx.fillText(`Level: ${level}`, canvas.width - 100, 50)
    
-  //check winning 
-  // if(cuddleY === canvas.height -200 && cuddleX-100 <=candyX && cuddleX-100 >=candyX-100 ){
-  //   console.log("candycollected")
 
-  // }
 
   if(level ===1 || level ===2){
   if(cuddleY === 50){
@@ -218,7 +176,7 @@ function draw(){
 }
 
 if(level ===3){
-  if(cuddleY === 50 && candyAmount === 0 ){
+  if(cuddleY === 50 && candyAmount <= 0 ){
     level = level+1
  
   
@@ -232,20 +190,24 @@ if(level ===3){
 
 
    //check collision here
+  
     if(cuddleY===canvas.height -200  && cuddleX-100 <=carX && cuddleX-100 >=carX-150){
         gameover= true;
+    
     }
+    if(level ===2 || level ===3){
     if(cuddleY===canvas.height -400  && cuddleX-100 <=carX2 && cuddleX-100 >=carX2-150){
       gameover= true;
-  }
+    }}
+   if (level === 3 ){
   if(cuddleY===canvas.height -300  && cuddleX-100 <=carX3 && cuddleX-100 >=carX3-150){
     gameover= true;
-}
+}}
 
 
 if(win){
 
-ctx.drawImage(winImg,0,0,800,750)
+ctx.drawImage(winImg,0,0,800,800)
 
   setInterval(() => {
     location.reload()
