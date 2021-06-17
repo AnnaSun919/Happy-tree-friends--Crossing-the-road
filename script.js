@@ -207,9 +207,15 @@ if(level ===3){
 
 if(win){
 
-ctx.drawImage(winImg,0,0,800,800)
-cancelAnimationFrame(intervalId)
+  ctx.drawImage(winImg,0,0,800,800)
 
+setInterval(() => {
+       
+  cancelAnimationFrame(intervalId)
+  
+  
+}, 1000);
+  
   setInterval(() => {
     location.reload()
     
