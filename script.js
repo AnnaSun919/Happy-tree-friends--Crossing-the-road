@@ -15,11 +15,8 @@ let cuddle = new Image();
 cuddle.src = "./image/clearnutty.png";
 let road = new Image();
 road.src = "./image/road2.png";
-let carred = new Image();
-carred.src = "./image/car1.png";
 let candyimg = new Image();
 candyimg.src = "./image/candy/candy2.4.png";
-
 let winImg = new Image();
 winImg.src = "./image/nuttysafe.jpeg";
 
@@ -37,12 +34,11 @@ let cuddleY = canvas.height - 100;
 let cuddleX = canvas.width / 2;
 intervalId = null;
 let gameover = false;
-let candyAmount = 2;
+let candyAmount = 5;
 let level = 1;
-let carX = 0;
-let carX2 = -100;
-let carX3 = -200;
 let win = false;
+let car1 = new Cars();
+let carArray = [[0, canvas.height - 200]];
 
 let candyArray = [
   [600, 520],
@@ -62,33 +58,6 @@ function start() {
 
 function road1(height) {
   ctx.drawImage(road, 0, height, canvas.width, 100);
-}
-
-function car1(y) {
-  ctx.drawImage(carred, carX, y, 120, 120);
-  carX = carX + 10;
-  if (carX > 800) {
-    carX = -Math.floor(Math.random() * 100);
-  }
-  return carX;
-}
-
-function car2(y) {
-  ctx.drawImage(carred, carX2, y, 120, 120);
-  carX2 = carX2 + 15;
-  if (carX2 > 800) {
-    carX2 = -Math.floor(Math.random() * 1000);
-  }
-  return carX2;
-}
-
-function car3(y) {
-  ctx.drawImage(carred, carX3, y, 120, 120);
-  carX3 = carX3 + 20;
-  if (carX3 > 800) {
-    carX3 = -Math.floor(Math.random() * 1000);
-  }
-  return carX3;
 }
 
 let sizeChange = 0.5;
@@ -124,22 +93,31 @@ function candy3(element) {
 function draw() {
   ctx.drawImage(bg, 0, 0, 800, 750);
   road1(canvas.height - 200);
-  car1(canvas.height - 200);
+
+  if (level === 1) {
+    if (cuddleY === 50) {
+      level = level + 1;
+      cuddleY = canvas.height - 100;
+      carArray.push([0, canvas.height - 400]);
+    }
+  }
 
   if (level === 2) {
     road1(canvas.height - 400);
-    car2(canvas.height - 400);
-    carX = carX + 5;
+
+    if (cuddleY === 50) {
+      level = level + 1;
+      cuddleY = canvas.height - 100;
+      carArray.push([0, canvas.height - 300]);
+      console.log(carArray);
+      console.log(cuddleY, car1.y);
+    }
   }
 
   if (level === 3) {
     road1(canvas.height - 400);
     road1(canvas.height - 300);
 
-    car2(canvas.height - 400);
-    car3(canvas.height - 300);
-    carX = carX;
-    carX2 = carX2;
     ctx.font = "bold 20px Verdana";
     //two candies
     candyArray.forEach((element) => {
@@ -149,20 +127,6 @@ function draw() {
     if (candyAmount > 0) {
       ctx.fillText(`you need to collect : ${candyAmount} candy `, 20, 50);
     }
-  }
-
-  ctx.drawImage(cuddle, cuddleX, cuddleY, 100, 100);
-  ctx.font = "20px Verdana";
-  ctx.fillText(`Level: ${level}`, canvas.width - 100, 50);
-
-  if (level === 1 || level === 2) {
-    if (cuddleY === 50) {
-      level = level + 1;
-      cuddleY = canvas.height - 100;
-    }
-  }
-
-  if (level === 3) {
     if (cuddleY === 50 && candyAmount <= 0) {
       level = level + 1;
     }
@@ -171,33 +135,32 @@ function draw() {
     win = true;
   }
 
-  //check collision here
+  carArray.forEach((element) => {
+    car1.drawCar(element);
+  });
 
-  if (
-    cuddleY === canvas.height - 200 &&
-    cuddleX - 100 <= carX &&
-    cuddleX - 100 >= carX - 150
-  ) {
-    gameover = true;
-  }
-  if (level === 2 || level === 3) {
+  carArray.forEach((element) => {
+    car1.reload(element);
+  });
+
+  ctx.drawImage(cuddle, cuddleX, cuddleY, 100, 100);
+  ctx.font = "20px Verdana";
+  ctx.fillText(`Level: ${level}`, canvas.width - 100, 50);
+
+  //check collision here
+  function checkGameover(element) {
     if (
-      cuddleY === canvas.height - 400 &&
-      cuddleX - 100 <= carX2 &&
-      cuddleX - 100 >= carX2 - 150
+      cuddleY === element[1] &&
+      cuddleX - 100 <= element[0] &&
+      cuddleX - 100 >= element[0] - 150
     ) {
       gameover = true;
     }
   }
-  if (level === 3) {
-    if (
-      cuddleY === canvas.height - 300 &&
-      cuddleX - 100 <= carX3 &&
-      cuddleX - 100 >= carX3 - 150
-    ) {
-      gameover = true;
-    }
-  }
+
+  carArray.forEach((element) => {
+    checkGameover(element);
+  });
 
   if (win) {
     ctx.drawImage(winImg, 0, 0, 800, 800);
