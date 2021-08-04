@@ -83,8 +83,8 @@ function candy3(element) {
     element[1] < cuddleY + 100 &&
     element[1] + dh > cuddleY
   ) {
-    element[0] = Math.random() * (canvas.width - 100) + 100;
-    element[1] = Math.random() * (canvas.height - 301) + 300;
+    element[0] = Math.round(Math.random() * (canvas.width - 50));
+    element[1] = Math.round(Math.random() * (canvas.height - 450) + 400);
 
     candyAmount = candyAmount - 1;
   }
@@ -104,9 +104,16 @@ function draw() {
 
   if (level === 2) {
     road1(canvas.height - 400);
+    if (candyAmount > 0) {
+      ctx.fillText(`you need to collect : ${candyAmount} candy `, 20, 50);
+    }
+    candyArray.forEach((element) => {
+      candy3(element);
+    });
 
-    if (cuddleY === 50) {
+    if (cuddleY === 50 && candyAmount <= 0) {
       level = level + 1;
+      candyAmount = candyAmount + 10;
       cuddleY = canvas.height - 100;
       carArray.push([0, canvas.height - 300, 0]);
     }
