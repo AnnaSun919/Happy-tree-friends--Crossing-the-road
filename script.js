@@ -38,7 +38,8 @@ let candyAmount = 5;
 let level = 1;
 let win = false;
 let car1 = new Cars();
-let carArray = [[0, canvas.height - 200]];
+
+let carArray = [[0, canvas.height - 200, 0]];
 
 let candyArray = [
   [600, 520],
@@ -83,8 +84,7 @@ function candy3(element) {
     element[1] + dh > cuddleY
   ) {
     element[0] = Math.random() * (canvas.width - 100) + 100;
-    element[1] = Math.random() * (canvas.height - 300) + 300;
-    console.log(element[0], element[1]);
+    element[1] = Math.random() * (canvas.height - 301) + 300;
 
     candyAmount = candyAmount - 1;
   }
@@ -98,7 +98,7 @@ function draw() {
     if (cuddleY === 50) {
       level = level + 1;
       cuddleY = canvas.height - 100;
-      carArray.push([0, canvas.height - 400]);
+      carArray.push([0, canvas.height - 400, 1]);
     }
   }
 
@@ -108,9 +108,7 @@ function draw() {
     if (cuddleY === 50) {
       level = level + 1;
       cuddleY = canvas.height - 100;
-      carArray.push([0, canvas.height - 300]);
-      console.log(carArray);
-      console.log(cuddleY, car1.y);
+      carArray.push([0, canvas.height - 300, 0]);
     }
   }
 
@@ -137,10 +135,6 @@ function draw() {
 
   carArray.forEach((element) => {
     car1.drawCar(element);
-  });
-
-  carArray.forEach((element) => {
-    car1.reload(element);
   });
 
   ctx.drawImage(cuddle, cuddleX, cuddleY, 100, 100);
