@@ -1,67 +1,66 @@
-Project's name -- 
-Happy Tree Friend - crossing the road 
+# Happy Tree Friend - crossing the road
 
+## Description
 
-Description
--------------------------------
-Happy Tree Friend - crossing the road is a game about Nutty(the character) is going to cross the road. You can move nutty vertically (up and down) and horizontally (right and left) to cross the road safely without getting crash by the cars. This game consists of three levels. in the first two levels, nutty only need to cross the road safely. when nutty finished crossing the road and go to the top , nutty is safe and the game will pass to next level.  In the third level, beside crossing the road, nutty also need to collect some candies. 
+A mini game consits of three levels.
+The player can move Nutty(the character) by pressing the arrow keys.
+In the first two levels, when nutty crossed the road safely without getting crashed by the car, the player will go to the next level.
+In the third level, player also need to collect enough candies in order to win the game.
 
+### MVP
 
-MVP
-------------------------------
+- three levels game
 
-- three level game 
-1. in first level :
+1. The first level :
 
-there is one road and one car  
-the car move from right to left  
-when the car on the road is gone , another car will apear  
-Nutty is going to cross the road, it moves vertically and horizontally  
-Nutty get crashed will end the game   
-if Nutty finished crossing the road then pass to the next level  
+```
+There is one road and one car
+The car move from right to left
+Nutty is going to cross the road
+If Nutty get crashed will end the game
+When Nutty finished crossing the road, the player will go to the next level
+```
 
-2. in second level :
+2. The second level :
 
-two road and one car on each road  
-the other settings are same as level 1   
+```
+Two roads and one car on each road
+The other settings are same as level 1
+```
 
-3. in third level :
+3. The final:
 
-three road and one car on each road   
-nutty has to collect enough candies.  
-the other settings are same as level 1 and level 2.  
-Just when Nutty finsihed this level, u win the game!  
+```
+Three road and one car on each road
+Nutty has to collect enough candies.
+The other settings are same as level 1 and level 2.
+When Nutty collected enought candies and finished crossing, the player will win the game!
+```
 
+## Backlog
 
+add music
 
-Backlog
-----------------------------
-
-add music 
-
-Data structure States y States Transitions
-------------------------------------
+## Data structure States y States Transitions
 
 buildSplashScreen () {}
 buildGameScreen () {}
 buildGameOverScreen () {}
-  
+
 starLoop () {}  
 checkCollisions () {}  
 drawCanvas () {}  
-GameOver () {}  
+GameOver () {}
 
 car(){}  
-checkScreenCollision () {}  
-
+checkScreenCollision () {}
 
 cuddle()  
 draw () {}  
 move () {}  
-checkScreenCollision () {}  
-
+checkScreenCollision () {}
 
 candy()  
 draw()  
 move () {}  
-checkScreenCollision () {}  
+checkScreenCollision () {}
