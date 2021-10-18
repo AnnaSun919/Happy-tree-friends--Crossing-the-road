@@ -2,10 +2,12 @@
 
 ## Description
 
-A mini game consits of three levels.
+A mini game consists of three levels.
 The player can move Nutty(the character) by pressing the arrow keys.
 In the first two levels, when nutty crossed the road safely without getting crashed by the car, the player will go to the next level.
-In the third level, player also need to collect enough candies in order to win the game.
+In the third level,besides of crossing the road safely, player also need to collect enough candies in order to win the game.
+
+This site was built using [GitHub Pages](https://annasun919.github.io/Happy-tree-friends--Crossing-the-road/).
 
 ### MVP
 
